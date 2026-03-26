@@ -1,0 +1,11 @@
+{
+  "name": "claude-notify",
+  "description": "Windows taskbar flash notification with sound when Claude needs your attention",
+  "version": "1.0.0",
+  "author": {
+    "name": "Seok"
+  },
+  "license": "MIT",
+  "keywords": ["notification", "windows", "taskbar", "flash"],
+  "hooks": "./hooks/hooks.json"
+}

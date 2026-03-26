@@ -29,14 +29,6 @@ public class TaskbarFlash {
 }
 "@
 
-# Play notification sound
-$soundFile = "C:\Windows\Media\Windows Proximity Notification.wav"
-if (Test-Path $soundFile) {
-    (New-Object System.Media.SoundPlayer $soundFile).Play()
-} else {
-    [System.Media.SystemSounds]::Asterisk.Play()
-}
-
 # Find terminal window and flash taskbar icon
 $terminalNames = @("WindowsTerminal", "Code", "claude", "mintty", "ConEmuC64", "ConEmuC")
 foreach ($name in $terminalNames) {
@@ -47,4 +39,13 @@ foreach ($name in $terminalNames) {
         [TaskbarFlash]::Flash($proc.MainWindowHandle, 5)
         break
     }
+}
+
+# Play notification sound (sync to prevent premature exit)
+$soundFile = "C:\Windows\Media\Windows Proximity Notification.wav"
+if (Test-Path $soundFile) {
+    (New-Object System.Media.SoundPlayer $soundFile).PlaySync()
+} else {
+    [System.Media.SystemSounds]::Asterisk.Play()
+    Start-Sleep -Milliseconds 500
 }
